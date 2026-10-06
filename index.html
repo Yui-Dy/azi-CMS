@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Azi_Nyang</title>
+    <meta name="description" content="Azi_Nyang 프로필">
+    <meta name="theme-color" content="#4a7fa5">
+    <meta property="og:type" content="profile">
+    <meta property="og:title" content="Azi_Nyang">
+    <meta property="og:description" content="Azi_Nyang 프로필">
+    <link rel="icon" id="favicon" href="https://cdn.discordapp.com/avatars/306747071640240138/a_0d4dace5d3daced9a08ce764eb01ebd5.png?size=64">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="is-intro">
+    <!-- 입장 화면 (한 번 눌러야 음악을 틀 수 있어서) -->
+    <button class="intro" id="intro" type="button" aria-label="사이트 들어가기">
+        <span class="intro-text">눌러서 들어가기</span>
+    </button>
+
+    <!-- 배경 영상 -->
+    <div class="video-background">
+        <video id="bg-video" autoplay muted loop playsinline preload="auto" poster="assets/bg-poster.jpg">
+            <source src="assets/bg-720.mp4" type="video/mp4" media="(max-width: 768px)">
+            <source src="assets/bg.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <main class="page" id="page">
+        <article class="card" id="card">
+            <div class="banner">
+                <img id="banner" src="https://cdn.discordapp.com/banners/306747071640240138/b50fddb1bbd5c1829082e415c3ccb01b.png?size=1024" alt="" draggable="false">
+            </div>
+
+            <!-- 디스코드 프로필 효과 (카드 위에 덮임) -->
+            <div class="profile-effect" id="profile-effect" aria-hidden="true"></div>
+
+            <button class="fold-btn" id="fold-btn" type="button" title="접기" aria-label="프로필 접기">
+                <i class="fa-solid fa-chevron-up"></i>
+            </button>
+
+            <div class="card-body">
+                <div class="card-top">
+                    <div class="avatar-wrap">
+                        <img class="avatar" src="https://cdn.discordapp.com/avatars/306747071640240138/a_0d4dace5d3daced9a08ce764eb01ebd5.png?size=256" alt="Azi_Nyang 프로필 사진" width="96" height="96" draggable="false">
+                        <img class="avatar-deco" id="avatar-deco" alt="" draggable="false" hidden>
+                        <span class="status-dot"></span>
+                    </div>
+
+                    <!-- 프사 오른쪽: 디스코드 배지 -->
+                    <div class="card-side">
+                        <span class="badges" id="badges">
+                            <img src="https://cdn.discordapp.com/badge-icons/2ba85e8026a8614b640c2837bcdfe21b.png" alt="Nitro" title="Nitro 구독자" draggable="false">
+                        </span>
+                    </div>
+                </div>
+
+                <!-- 이름 (디스코드 명패가 뒤에 깔림) -->
+                <div class="identity" id="identity">
+                    <video class="nameplate" id="nameplate" muted loop playsinline hidden></video>
+                    <div class="identity-text">
+                        <div class="name-row">
+                            <h1 class="display-name" id="display-name">Azi_Nyang</h1>
+                            <span class="guild-tag" id="guild-tag" title="서버 태그" hidden>
+                                <img id="guild-badge" alt="" draggable="false">
+                                <span id="guild-tag-text"></span>
+                            </span>
+                        </div>
+                        <button class="handle" id="handle" type="button" title="클릭해서 아이디 복사">@azi_nyang</button>
+                    </div>
+                </div>
+
+                <p class="presence">
+                    <span class="chip">VRChat</span>
+                    <span id="status-text">연결 중…</span>
+                    <span class="device" id="device"></span>
+                </p>
+
+                <!-- 커스텀 상태 -->
+                <p class="custom-status" id="custom-status" hidden>
+                    <img class="custom-status-emoji" id="custom-status-emoji" alt="" hidden>
+                    <span id="custom-status-text"></span>
+                </p>
+
+                <!-- Discord 활동 -->
+                <section class="activity" id="activity-section" hidden>
+                    <div class="activity-head">
+                        <span id="activity-type">플레이 중</span>
+                        <span class="activity-time" id="activity-time"></span>
+                    </div>
+                    <div class="activity-body">
+                        <div class="activity-art">
+                            <img id="activity-image" alt="" draggable="false" hidden>
+                            <i class="fa-solid fa-gamepad" id="activity-fallback"></i>
+                        </div>
+                        <div class="activity-text">
+                            <p class="activity-name" id="activity-name"></p>
+                            <p class="activity-sub" id="activity-details"></p>
+                            <p class="activity-sub" id="activity-state"></p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Spotify -->
+                <a class="activity spotify" id="spotify-section" target="_blank" rel="noopener" hidden>
+                    <div class="activity-head">
+                        <span><i class="fa-brands fa-spotify"></i> Spotify에서 듣는 중</span>
+                    </div>
+                    <div class="activity-body">
+                        <div class="activity-art">
+                            <img id="album-art" alt="" draggable="false">
+                        </div>
+                        <div class="activity-text">
+                            <p class="activity-name" id="song-name"></p>
+                            <p class="activity-sub" id="artist-name"></p>
+                            <div class="progress"><div class="progress-bar" id="progress-bar"></div></div>
+                            <div class="time-info">
+                                <span id="current-time">0:00</span>
+                                <span id="total-time">0:00</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 소셜 링크 -->
+                <nav class="links">
+                    <a href="https://x.com/Ho_Nyang_2" target="_blank" rel="noopener" class="link">
+                        <i class="fa-brands fa-x-twitter"></i>
+                        <span>X</span>
+                    </a>
+                    <a href="https://discord.com/users/306747071640240138" target="_blank" rel="noopener" class="link">
+                        <i class="fa-brands fa-discord"></i>
+                        <span>Discord</span>
+                    </a>
+                    <a href="https://steamcommunity.com/id/tpgh1480/" target="_blank" rel="noopener" class="link">
+                        <i class="fa-brands fa-steam"></i>
+                        <span>Steam</span>
+                    </a>
+                </nav>
+
+                <footer class="footer">© 2026, Made by dorang</footer>
+            </div>
+        </article>
+
+        <!-- 접었을 때 남는 프사 버튼 -->
+        <button class="fold-bubble" id="fold-bubble" type="button" aria-label="프로필 펼치기" title="펼치기">
+            <img class="avatar" src="https://cdn.discordapp.com/avatars/306747071640240138/a_0d4dace5d3daced9a08ce764eb01ebd5.png?size=256" alt="" draggable="false">
+            <span class="status-dot"></span>
+        </button>
+    </main>
+
+    <!-- 방문자 수 · 하트 (왼쪽 아래, Firebase 주소가 있어야 보임) -->
+    <div class="stats" id="stats" hidden>
+        <span class="stat" title="방문자 수">
+            <i class="fa-solid fa-eye"></i>
+            <span id="visit-count">-</span>
+        </span>
+        <button class="stat heart-btn" id="heart-btn" type="button" title="하트 누르기" aria-label="하트 누르기">
+            <i class="fa-solid fa-heart"></i>
+            <span id="heart-count">-</span>
+        </button>
+    </div>
+
+    <!-- 배경음악 -->
+    <div class="music" id="music">
+        <div class="music-panel" id="music-panel" role="dialog" aria-label="배경음악">
+            <p class="music-title">배경음악</p>
+            <ul class="playlist" id="playlist"></ul>
+            <div class="music-progress">
+                <input type="range" id="music-seek" min="0" max="1000" value="0" step="1" aria-label="재생 위치">
+                <div class="music-time">
+                    <span id="music-current">0:00</span>
+                    <span id="music-duration">0:00</span>
+                </div>
+            </div>
+            <p class="music-error" id="music-error" hidden>음악을 불러오지 못했어요.</p>
+            <label class="music-volume">
+                <i class="fa-solid fa-volume-low"></i>
+                <input type="range" id="music-volume" min="0" max="100" value="30" aria-label="볼륨">
+            </label>
+        </div>
+        <button class="music-btn" id="music-btn" type="button" title="배경음악" aria-label="배경음악 목록" aria-expanded="false" aria-controls="music-panel">
+            <i class="fa-solid fa-music"></i>
+            <span class="eq" aria-hidden="true"><span></span><span></span><span></span></span>
+        </button>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="music.js"></script>
+    <script src="counter.js"></script>
+</body>
+</html>
